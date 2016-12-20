@@ -10,11 +10,14 @@
         "test:watch": "npm run test -- --watch"
     },
     "dependencies": {
-        "babel-polyfill": "6.8.0",
+        "babel-polyfill": "^6.20.0",
         "bootstrap": "3.3.6",
         "jquery": "2.2.3",
-        "react": "15.0.2",
-        "react-dom": "15.0.2",
+        "postcss": "^5.2.6",
+        "postcss-cssnext": "^2.9.0",
+        "postcss-loader": "^1.2.1",
+        "react": "^15.4.1",
+        "react-dom": "^15.4.1",
         "react-redux": "4.4.5",
         "react-router": "2.4.0",
         "react-router-redux": "4.0.4",
