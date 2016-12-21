@@ -18,9 +18,13 @@ class KontragentsSection extends React.Component {
     }
 
     render() {
+        const props = this.props;
         return (
             <div>
-                <ItemsList list={this.props.list} onRemove={this.removeItem}/>
+                <div className={props.titleClass}>Контрагенты, для которых нужно применять данное
+                    правило:
+                </div>
+                <ItemsList list={props.list} onRemove={this.removeItem}/>
             </div>
         );
     }
