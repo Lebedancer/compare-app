@@ -1,0 +1,12 @@
+.itemView {
+  display: flex;
+  justify-content: space-between;
+  line-height: 32px;
+  transition: background 0.3s linear;
+  padding: 0 7px;
+  margin-right: 10px;
+
+  &:hover {
+    background: #f1f1f1;
+  }
+}

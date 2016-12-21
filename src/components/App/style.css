@@ -1,7 +1,34 @@
 :root {
-    --mainColor: red;
+  --mainColor: green;
 }
 
 .app {
-    background: var(--mainColor);
+  font-family: Arial;
+  font-size: 13px;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.app__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app__list > li {
+  margin-bottom: 20px;
+  position: relative;
+  padding-left: 42px;
+}
+
+.app__listHeader {
+  line-height: 31px;
+  font-size: 15px;
+  display: inline-block;
+}
+
+/************************************/
+
+.md-row--form {
+  margin-bottom: 16px;
 }
