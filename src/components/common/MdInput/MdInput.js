@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import style from './style.css';
 
-const TextInput = ({ onChange, placeholder, value, error }) => {
+const MdInput = ({ onChange, placeholder, value, error }) => {
     let wrapperClass = style['md-input'];
 
     if (error) {
@@ -22,7 +22,7 @@ const TextInput = ({ onChange, placeholder, value, error }) => {
     );
 };
 
-TextInput.propTypes = {
+MdInput.propTypes = {
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     value: PropTypes.string,
@@ -30,4 +30,4 @@ TextInput.propTypes = {
 
 };
 
-export default TextInput;
+export default MdInput;

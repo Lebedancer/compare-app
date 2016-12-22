@@ -5,6 +5,9 @@ import KontragentsSection from '../KontragentsSection';
 import appService from './appService';
 import MdInput from '../common/MdInput';
 import Loader from 'react-loader';
+import validationRules from './validationRules';
+import ValidationService from '../../services/ValidationService';
+import FooterSection from '../FooterSection';
 
 import style from './style.css';
 
@@ -17,6 +20,13 @@ class App extends React.Component {
         };
 
         this._onChange = this._onChange.bind(this);
+        this._getErrors = this._getErrors.bind(this);
+        this._onChangeName = this._onChangeName.bind(this);
+        this._onSave = this._onSave.bind(this);
+
+        this.validationService = new ValidationService({
+            rules: validationRules
+        });
     }
 
     componentWillMount() {
@@ -30,11 +40,30 @@ class App extends React.Component {
             data,
             loading: false
         });
+
+        this.validationService.setDefaultData(data);
     }
 
     _onChange(data) {
         const state = this.state.data;
         this.setState({ data: Object.assign({}, state, data)});
+    }
+
+    _getErrors(name) {
+        return this.validationService.getMessage(name, this.state.data);
+    }
+
+    _onChangeName(event) {
+        const val = event.target.value;
+        this._onChange({Name: val})
+    }
+
+    _onSave() {
+        if (this.validationService.isValid(this.state.data)) {
+            console.log('Заебись');
+        } else {
+            console.error('Baaad');
+        }
     }
 
     render() {
@@ -76,9 +105,10 @@ class App extends React.Component {
                             <li>
                                 <LineNumber number="5"/>
                                 <div className={titleClassName}>Название правила:</div>
-                                <MdInput/>
+                                <MdInput error={this._getErrors('Name')} onChange={this._onChangeName} />
                             </li>
                         </ul>
+                        <FooterSection onSave={this._onSave}/>
                     </div>
                 }
             </div>);
