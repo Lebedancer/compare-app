@@ -60,9 +60,11 @@ class App extends React.Component {
 
     _onSave() {
         if (this.validationService.isValid(this.state.data)) {
-            console.log('Заебись');
+            this.setState({
+                saveProcess: true
+            });
         } else {
-            console.error('Baaad');
+            this.forceUpdate();
         }
     }
 
@@ -108,7 +110,7 @@ class App extends React.Component {
                                 <MdInput error={this._getErrors('Name')} onChange={this._onChangeName} />
                             </li>
                         </ul>
-                        <FooterSection onSave={this._onSave}/>
+                        <FooterSection onSave={this._onSave} loading={state.saveProcess}/>
                     </div>
                 }
             </div>);

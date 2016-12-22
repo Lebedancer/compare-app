@@ -19,7 +19,7 @@ export default class ValidationService {
         const rule = this.rules[field];
         const currentVal = data[field];
 
-        if (rule && this._isValueChange({ field, currentVal })) {
+        if (rule && (this._isValueChange({ field, currentVal }) || this.fullValidation)) {
             message =  Validate.single(currentVal, rule);
         }
 
@@ -27,6 +27,7 @@ export default class ValidationService {
     }
 
     isValid(data) {
+        this.fullValidation = true;
         return !Validate.validate(data, this.rules);
     }
 

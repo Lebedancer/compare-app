@@ -1,4 +1,6 @@
 import React, {PropTypes} from 'react';
+import MdButton from '../common/MdButton';
+import style from './style.css';
 
 class FooterSection extends React.Component {
     constructor(props, context) {
@@ -6,9 +8,11 @@ class FooterSection extends React.Component {
     }
 
     render() {
+        const { loading, onSave } = this.props;
+
         return (
-            <div>
-                <button onClick={this.props.onSave}>Сохранить</button>
+            <div className={style.footer}>
+                <MdButton onClick={onSave} title="Сохранить" loading={loading} />
                 <a>Отмена</a>
             </div>
         );
