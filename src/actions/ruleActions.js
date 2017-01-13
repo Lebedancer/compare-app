@@ -9,7 +9,7 @@ export function saveRuleSuccess(rule) {
     return { type: types.SAVE_RULE_SUCCESS, rule };
 }
 
-export function loadCourses() {
+export function loadRule() {
     return function(dispatch) {
         return ruleService.get()
             .then(rule => {
@@ -21,7 +21,7 @@ export function loadCourses() {
     };
 }
 
-export function saveCourse(rule) {
+export function saveRule(rule) {
     return function(dispatch) {
         return ruleService.save(rule)
             .then(rule => {

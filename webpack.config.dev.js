@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import path from 'path';
 
 export default {
+    watch: true,
     devtool: 'cheap-module-eval-source-map',
     entry: [
         'eventsource-polyfill', // necessary for hot reloading with IE

@@ -1,5 +1,3 @@
-import React, {PropTypes} from 'react';
-
 const headers = {
     headers: {
         Accept: 'application/json',
@@ -18,8 +16,11 @@ class ruleService {
             });
     }
 
-    save() {
-        return fetch('/save', Object.assign({}, headers, {method: 'post'}));
+    save(rule) {
+        return fetch('/save', Object.assign({}, headers, {method: 'post'}))
+            .then(()=> {
+                return rule;
+            });
     }
 }
 

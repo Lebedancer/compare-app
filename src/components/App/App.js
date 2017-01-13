@@ -2,12 +2,14 @@ import React, {PropTypes} from 'react';
 
 import LineNumber from '../common/LineNumber';
 import KontragentsSection from '../KontragentsSection';
-import appService from './appService';
 import MdInput from '../common/MdInput';
 import Loader from 'react-loader';
 import validationRules from './validationRules';
 import ValidationService from '../../services/ValidationService';
 import FooterSection from '../FooterSection';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as ruleActions from '../../actions/ruleActions';
 
 import style from './style.css';
 
@@ -30,19 +32,18 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        this.getData();
+        debugger;
     }
 
-    async getData() {
-        const data = await appService.get();
-
-        this.setState({
-            data,
-            loading: false
-        });
-
-        this.validationService.setDefaultData(data);
-    }
+    // async getData() {
+    //     const data = await appService.get();
+    //     this.setState({
+    //         data,
+    //         loading: false
+    //     });
+    //
+    //     this.validationService.setDefaultData(data);
+    // }
 
     _onChange(data) {
         const state = this.state.data;
@@ -50,7 +51,8 @@ class App extends React.Component {
     }
 
     _getErrors(name) {
-        return this.validationService.getMessage(name, this.state.data);
+        // return this.validationService.getMessage(name, this.state.data);
+        return '';
     }
 
     _onChangeName(event) {
@@ -59,24 +61,32 @@ class App extends React.Component {
     }
 
     _onSave() {
-        if (this.validationService.isValid(this.state.data)) {
-            this.setState({
-                saveProcess: true
-            });
-        } else {
-            this.forceUpdate();
-        }
+        // if (this.validationService.isValid(this.state.data)) {
+        debugger;
+        const saveData = {...this.props.rule, ...this.state.data};
+        this.props.actions.saveRule(saveData);
+
+            // this.setState({
+            //     saveProcess: true
+            // });
+        // } else {
+        //     this.forceUpdate();
+        // }
+    }
+
+    componentWillReceiveProps() {
+        debugger;
     }
 
     render() {
         const titleClassName = `${style['md-row--form']} ${style['app__listHeader']}`;
         const state = this.state;
-        const data = this.state.data;
+        const data = this.props.rule;
 
         return (
             <div className={style.app}>
 
-                { state.loading ? <Loader /> :
+                { !data.Id ? <Loader /> :
                     <div>
                         <h1>Новое правило</h1>
                         <ul className={style.app__list}>
@@ -117,4 +127,22 @@ class App extends React.Component {
     }
 }
 
-export default App;
+function mapStateToProps(state, ownProps) {
+    let rule = {Id: '', Name: '', OperationType: 0, Keywords: [], Kontragents: [], KontragentUsageMode: 0};
+
+    if (state.ruleReducer.Id) {
+        rule = state.ruleReducer;
+    }
+
+    return {
+        rule
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(ruleActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

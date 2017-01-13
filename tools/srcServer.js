@@ -19,8 +19,8 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/get', function(req, res) {
     res.json({
-        Id: 0,
-        Name: '',
+        Id: 1,
+        Name: '234234',
         OperationType: 0,
         Keywords: [],
         Kontragents: [
