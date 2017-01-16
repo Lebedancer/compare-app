@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import MdButton from '../common/MdButton';
 import style from './style.css';
 
@@ -8,19 +8,16 @@ class FooterSection extends React.Component {
     }
 
     render() {
-        const { loading, onSave } = this.props;
+        const { loading, onSave, onCancel } = this.props;
 
         return (
             <div className={style.footer}>
                 <MdButton onClick={onSave} title="Сохранить" loading={loading} />
-                <a>Отмена</a>
+                <a onClick={onCancel}>Отмена</a>
             </div>
         );
     }
 }
 
-// FooterSection.propTypes = {
-//     list: PropTypes.array.isRequired
-// };
 
 export default FooterSection;

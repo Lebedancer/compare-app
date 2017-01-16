@@ -11,6 +11,13 @@ const headers = {
 };
 
 class AppService {
+    getList() {
+        return fetch('/getList', headers)
+            .then(response => {
+                return response.json();
+            });
+    }
+
     get() {
         return fetch('/get', headers)
             .then(response => {

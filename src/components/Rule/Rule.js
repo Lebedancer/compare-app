@@ -2,16 +2,17 @@ import React, {PropTypes} from 'react';
 
 import LineNumber from '../common/LineNumber';
 import KontragentsSection from '../KontragentsSection';
-import appService from './appService';
+import appService from '../../services/appService';
 import MdInput from '../common/MdInput';
 import Loader from 'react-loader';
 import validationRules from './validationRules';
 import ValidationService from '../../services/ValidationService';
 import FooterSection from '../FooterSection';
+import { browserHistory} from 'react-router';
 
 import style from './style.css';
 
-class App extends React.Component {
+class Rule extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -23,6 +24,7 @@ class App extends React.Component {
         this._getErrors = this._getErrors.bind(this);
         this._onChangeName = this._onChangeName.bind(this);
         this._onSave = this._onSave.bind(this);
+        this._onCancel = this._onCancel.bind(this);
 
         this.validationService = new ValidationService({
             rules: validationRules
@@ -68,6 +70,11 @@ class App extends React.Component {
         }
     }
 
+    _onCancel() {
+        console.log(browserHistory);
+        browserHistory.goBack()
+    }
+
     render() {
         const titleClassName = `${style['md-row--form']} ${style['app__listHeader']}`;
         const state = this.state;
@@ -110,11 +117,11 @@ class App extends React.Component {
                                 <MdInput error={this._getErrors('Name')} onChange={this._onChangeName} />
                             </li>
                         </ul>
-                        <FooterSection onSave={this._onSave} loading={state.saveProcess}/>
+                        <FooterSection onSave={this._onSave} onCancel={this._onCancel} loading={state.saveProcess}/>
                     </div>
                 }
             </div>);
     }
 }
 
-export default App;
+export default Rule;

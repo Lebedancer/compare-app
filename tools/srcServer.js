@@ -35,6 +35,13 @@ app.get('/get', function(req, res) {
     });
 });
 
+app.get('/getList', function(req, res) {
+    res.json([
+        {Id: 1, Name: 'Rule #1'},
+        {Id: 2, Name: 'Rule #2'}
+    ]);
+});
+
 app.post('/save', function(req, res) {
     res.sendStatus(200);
 });
