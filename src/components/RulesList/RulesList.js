@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 
 import appService from '../../services/appService'
 import Loader from 'react-loader';
-import MdCloseLink from '../common/MdCloseLink';
 import RuleListItem from './RuleListItem';
 
 import style from './style.css';

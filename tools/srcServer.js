@@ -1,4 +1,5 @@
 import express from 'express';
+import fs from 'fs';
 import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
@@ -36,10 +37,7 @@ app.get('/get', function(req, res) {
 });
 
 app.get('/getList', function(req, res) {
-    res.json([
-        {Id: 1, Name: 'Rule #1'},
-        {Id: 2, Name: 'Rule #2'}
-    ]);
+    res.json(getFile());
 });
 
 app.post('/save', function(req, res) {
@@ -57,3 +55,7 @@ app.listen(port, function(err) {
         open(`http://localhost:${port}`);
     }
 });
+
+function getFile() {
+    return JSON.parse(fs.readFileSync('db/file.json', 'utf8'));
+}
