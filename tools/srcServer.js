@@ -19,25 +19,29 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/get', function(req, res) {
-    res.json({
-        Id: 0,
-        Name: 'Rule',
-        OperationType: 0,
-        Keywords: [],
-        Kontragents: [
-            { Id: 1, Name: 'Kontragent1' },
-            { Id: 2, Name: 'Kontragent2' },
-            { Id: 3, Name: 'Kontragent3' },
-            { Id: 4, Name: 'Kontragent4' }
-        ],
-        KontragentUsageMode: 0,
-        SettlementAccounts: [],
-        SettlementAccountUsageMode: 0
-    });
+    setTimeout(function() {
+        res.json({
+            Id: 0,
+            Name: 'Rule',
+            OperationType: 0,
+            Keywords: [],
+            Kontragents: [
+                { Id: 1, Name: 'Kontragent1' },
+                { Id: 2, Name: 'Kontragent2' },
+                { Id: 3, Name: 'Kontragent3' },
+                { Id: 4, Name: 'Kontragent4' }
+            ],
+            KontragentUsageMode: 0,
+            SettlementAccounts: [],
+            SettlementAccountUsageMode: 0
+        });
+    }, 1000);
 });
 
 app.get('/getList', function(req, res) {
-    res.json(getFile());
+    setTimeout(function() {
+        res.json(getFile());
+    }, 1000);
 });
 
 app.post('/save', function(req, res) {

@@ -51,11 +51,11 @@ class App extends React.Component {
                                 <RuleListItem key={rule.Id} data={rule}/>
                             )}
                         </ul>
+                        <footer className={style.list__footer}>
+                            <MdButton title="Новое правило" onClick={this._createNewRule}/>
+                        </footer>
                     </div>
                 }
-                <footer className={style.list__footer}>
-                    <MdButton title="Новое правило" onClick={this._createNewRule}/>
-                </footer>
             </div>);
     }
 }
