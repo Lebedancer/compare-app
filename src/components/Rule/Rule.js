@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 
 import LineNumber from '../common/LineNumber';
-import KontragentsSection from '../KontragentsSection';
+import KontragentsSection from './KontragentsSection';
 import appService from '../../services/appService';
 import MdInput from '../common/MdInput';
 import Loader from 'react-loader';
 import validationRules from './validationRules';
 import ValidationService from '../../services/ValidationService';
-import FooterSection from '../FooterSection';
+import FooterSection from './FooterSection';
 import { browserHistory } from 'react-router';
 
 import style from './style.css';

@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-// import style from './style.css';
 import ItemsList from '../ItemsList';
 
 class KontragentsSection extends React.Component {
