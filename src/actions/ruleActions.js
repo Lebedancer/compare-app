@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import ruleService from '../services/ruleService';
+import appService from '../services/appService';
 
 export function loadRuleSuccess(rule) {
     return { type: types.LOAD_RULE_SUCCESS, rule };
@@ -11,7 +11,7 @@ export function saveRuleSuccess(rule) {
 
 export function loadRule() {
     return function(dispatch) {
-        return ruleService.get()
+        return appService.get()
             .then(rule => {
                 dispatch(loadRuleSuccess(rule));
             })
@@ -23,7 +23,7 @@ export function loadRule() {
 
 export function saveRule(rule) {
     return function(dispatch) {
-        return ruleService.save(rule)
+        return appService.save(rule)
             .then(rule => {
                 dispatch(saveRuleSuccess(rule));
             })

@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import MdButton from '../common/MdButton';
+import MdButton from '../../common/MdButton';
 import style from './style.css';
 
 class FooterSection extends React.Component {
