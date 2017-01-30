@@ -21,7 +21,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.get('/get', function(req, res) {
     res.json({
         Id: 0,
-        Name: '',
+        Name: 'Rule',
         OperationType: 0,
         Keywords: [],
         Kontragents: [
@@ -41,7 +41,9 @@ app.get('/getList', function(req, res) {
 });
 
 app.post('/save', function(req, res) {
-    res.sendStatus(200);
+    setTimeout(function() {
+        res.sendStatus(200);
+    }, 1000);
 });
 
 app.get('*', function(req, res) {

@@ -3,6 +3,9 @@ import React, {PropTypes} from 'react';
 import appService from '../../services/appService'
 import Loader from 'react-loader';
 import RuleListItem from './RuleListItem';
+import MdButton from '../common/MdButton';
+
+import { browserHistory } from "react-router";
 
 import style from './style.css';
 
@@ -13,6 +16,8 @@ class App extends React.Component {
         this.state = {
             loading: true
         };
+
+        this._createNewRule = this._createNewRule.bind(this);
     }
 
     componentWillMount() {
@@ -26,6 +31,10 @@ class App extends React.Component {
             data,
             loading: false
         });
+    }
+
+    _createNewRule() {
+        browserHistory.push('/rule');
     }
 
     render() {
@@ -44,6 +53,9 @@ class App extends React.Component {
                         </ul>
                     </div>
                 }
+                <footer className={style.list__footer}>
+                    <MdButton title="Новое правило" onClick={this._createNewRule}/>
+                </footer>
             </div>);
     }
 }

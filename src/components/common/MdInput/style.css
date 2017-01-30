@@ -25,3 +25,11 @@
   }
 }
 
+.md-input--error input {
+  border-color: red;
+}
+
+.validation {
+  color: red;
+  margin-top: 10px;
+}

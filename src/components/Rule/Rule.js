@@ -8,7 +8,7 @@ import Loader from 'react-loader';
 import validationRules from './validationRules';
 import ValidationService from '../../services/ValidationService';
 import FooterSection from '../FooterSection';
-import { browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 
 import style from './style.css';
 
@@ -17,7 +17,11 @@ class Rule extends React.Component {
         super(props, context);
 
         this.state = {
-            loading: true
+            loading: true,
+            data: {
+                Kontragents: [],
+                Name: ''
+            }
         };
 
         this._onChange = this._onChange.bind(this);
@@ -32,10 +36,19 @@ class Rule extends React.Component {
     }
 
     componentWillMount() {
-        this.getData();
+        const routeParams = this.props.routeParams;
+        const id = routeParams.id;
+
+        if (id) {
+            this.getData(id);
+        } else {
+            this.setState({
+                loading: false
+            });
+        }
     }
 
-    async getData() {
+    async getData(id) {
         const data = await appService.get();
 
         this.setState({
@@ -65,13 +78,17 @@ class Rule extends React.Component {
             this.setState({
                 saveProcess: true
             });
+
+            appService.save()
+                .then(()=> {
+                    this._onCancel();
+                })
         } else {
             this.forceUpdate();
         }
     }
 
     _onCancel() {
-        console.log(browserHistory);
         browserHistory.goBack()
     }
 
@@ -114,7 +131,7 @@ class Rule extends React.Component {
                             <li>
                                 <LineNumber number="5"/>
                                 <div className={titleClassName}>Название правила:</div>
-                                <MdInput error={this._getErrors('Name')} onChange={this._onChangeName} />
+                                <MdInput error={this._getErrors('Name')} value={data.Name} onChange={this._onChangeName} />
                             </li>
                         </ul>
                         <FooterSection onSave={this._onSave} onCancel={this._onCancel} loading={state.saveProcess}/>

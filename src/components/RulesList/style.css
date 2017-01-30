@@ -16,3 +16,7 @@
   position: relative;
   padding-left: 42px;
 }
+
+.list__footer {
+  margin-top: 40px;
+}
