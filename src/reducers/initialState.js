@@ -1,3 +1,4 @@
 export default {
-    rule: {}
+    rule: {},
+    rules: []
 };
