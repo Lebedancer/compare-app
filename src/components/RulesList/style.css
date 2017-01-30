@@ -1,0 +1,22 @@
+.list__page {
+  font-family: Arial;
+  font-size: 13px;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list > li {
+  margin-bottom: 20px;
+  position: relative;
+  padding-left: 42px;
+}
+
+.list__footer {
+  margin-top: 40px;
+}
