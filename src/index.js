@@ -1,6 +1,5 @@
 import 'babel-polyfill';
 import configureStore from './store/configureStore';
-import {loadRule} from './actions/ruleActions';
 import {Provider} from 'react-redux';
 import React from 'react';
 import {render} from 'react-dom';
@@ -9,7 +8,6 @@ import routes from './routes';
 
 const store = configureStore();
 
-store.dispatch(loadRule());
 
 render(
     <Provider store={store}>

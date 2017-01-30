@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
 
-import appService from '../../services/appService'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as ruleActions from '../../actions/ruleActions';
 import Loader from 'react-loader';
 import RuleListItem from './RuleListItem';
 import MdButton from '../common/MdButton';
@@ -9,28 +11,15 @@ import { browserHistory } from "react-router";
 
 import style from './style.css';
 
-class App extends React.Component {
+class RulesList extends React.Component {
     constructor(props, context) {
         super(props, context);
-
-        this.state = {
-            loading: true
-        };
 
         this._createNewRule = this._createNewRule.bind(this);
     }
 
     componentWillMount() {
-        this.getData();
-    }
-
-    async getData() {
-        const data = await appService.getList();
-
-        this.setState({
-            data,
-            loading: false
-        });
+        this.props.actions.loadRules();
     }
 
     _createNewRule() {
@@ -38,12 +27,11 @@ class App extends React.Component {
     }
 
     render() {
-        const state = this.state;
-        const rules = this.state.data;
+        const rules = this.props.data;
 
         return (
             <div className={style.list__page}>
-                { state.loading ? <Loader /> :
+                { !rules ? <Loader /> :
                     <div>
                         <h1>Список правил</h1>
                         <ul className={style.list}>
@@ -60,4 +48,22 @@ class App extends React.Component {
     }
 }
 
-export default App;
+function mapStateToProps(state, ownProps) {
+    let data;
+
+    if (state.ruleReducer.length) {
+        data = state.ruleReducer;
+    }
+
+    return {
+        data
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(ruleActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RulesList);

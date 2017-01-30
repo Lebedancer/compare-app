@@ -5,8 +5,12 @@ export function loadRuleSuccess(rule) {
     return { type: types.LOAD_RULE_SUCCESS, rule };
 }
 
-export function loadRulesSuccess(rule) {
-    return { type: types.LOAD_RULES_SUCCESS, rule };
+export function loadRulesSuccess(rules) {
+    return { type: types.LOAD_RULES_SUCCESS, rules };
+}
+
+export function startSaveRule() {
+    return { type: types.START_SAVE_RULE };
 }
 
 export function saveRuleSuccess(rule) {
@@ -28,8 +32,8 @@ export function loadRule() {
 export function loadRules() {
     return function(dispatch) {
         return appService.getList()
-            .then(rule => {
-                dispatch(loadRuleSuccess(rule));
+            .then(rules => {
+                dispatch(loadRulesSuccess(rules));
             })
             .catch(error => {
                 throw(error);

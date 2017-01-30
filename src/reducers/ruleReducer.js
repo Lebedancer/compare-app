@@ -7,6 +7,8 @@ export default function ruleReducer(state = initialState.rule, action) {
             return action.rule;
         case types.LOAD_RULES_SUCCESS:
             return action.rules;
+        case types.START_SAVE_RULE:
+            return action.rules;
         case types.SAVE_RULE_SUCCESS:
             return {...state, ...action.rule};
        default:

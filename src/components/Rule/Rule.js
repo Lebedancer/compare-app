@@ -1,5 +1,9 @@
 import React, {PropTypes} from 'react';
 
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as ruleActions from '../../actions/ruleActions';
+
 import LineNumber from '../common/LineNumber';
 import KontragentsSection from './KontragentsSection';
 import appService from '../../services/appService';
@@ -40,24 +44,20 @@ class Rule extends React.Component {
         const id = routeParams.id;
 
         if (id) {
-            this.getData(id);
-        } else {
-            this.setState({
-                loading: false
-            });
+            this.props.actions.loadRule();
         }
     }
 
-    async getData(id) {
-        const data = await appService.get();
-
-        this.setState({
-            data,
-            loading: false
-        });
-
-        this.validationService.setDefaultData(data);
-    }
+    // async getData(id) {
+    //     const data = await appService.get();
+    //
+    //     this.setState({
+    //         data,
+    //         loading: false
+    //     });
+    //
+    //     this.validationService.setDefaultData(data);
+    // }
 
     _onChange(data) {
         const state = this.state.data;
@@ -94,13 +94,12 @@ class Rule extends React.Component {
 
     render() {
         const titleClassName = `${style['md-row--form']} ${style['app__listHeader']}`;
-        const state = this.state;
-        const data = this.state.data;
-
+        const data = this.props.data;
+            debugger;
         return (
             <div className={style.app}>
 
-                { state.loading ? <Loader /> :
+                { !data ? <Loader /> :
                     <div>
                         <h1>Новое правило</h1>
                         <ul className={style.app__list}>
@@ -141,4 +140,29 @@ class Rule extends React.Component {
     }
 }
 
-export default Rule;
+function mapStateToProps(state, ownProps) {
+    let data;
+    debugger;
+    if (ownProps.params.id) {
+        if (state.ruleReducer.Id) {
+            data = state.ruleReducer;
+        }
+    } else {
+        data = {
+            Kontragents: [],
+            Name: ''
+        }
+    }
+
+    return {
+        data
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(ruleActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Rule);

@@ -21,7 +21,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.get('/get', function(req, res) {
     setTimeout(function() {
         res.json({
-            Id: 0,
+            Id: 1,
             Name: 'Rule',
             OperationType: 0,
             Keywords: [],
