@@ -19,10 +19,10 @@ const RuleListItem = ({ data })=>{
     }
 
     return (
-        <li className={style.item}><a href={_getHref(data.Id)} onClick={_onClick}>{data.Name}</a><MdCloseLink /></li>
+        <li className={style.item}>
+            <a href={_getHref(data.Id)} onClick={_onClick}>{data.Name}</a><MdCloseLink />
+        </li>
     )
 };
-
-
 
 export default RuleListItem;
