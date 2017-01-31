@@ -1,4 +1,9 @@
 export default {
-    rule: {},
-    rules: []
+    rules: {
+        list: [],
+        loading: false
+    },
+    rule: {
+        loading: true
+    }
 };

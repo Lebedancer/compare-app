@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ruleActions from '../../actions/ruleActions';
+import * as rulesActions from '../../actions/rulesActions';
 import Loader from 'react-loader';
 import RuleListItem from './RuleListItem';
 import MdButton from '../common/MdButton';
@@ -27,11 +27,12 @@ class RulesList extends React.Component {
     }
 
     render() {
-        const rules = this.props.data;
+        const data = this.props.data;
+        const rules = data.list;
 
         return (
             <div className={style.list__page}>
-                { !rules ? <Loader /> :
+                { data.loading ? <Loader /> :
                     <div>
                         <h1>Список правил</h1>
                         <ul className={style.list}>
@@ -49,20 +50,14 @@ class RulesList extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    let data;
-
-    if (state.ruleReducer.length) {
-        data = state.ruleReducer;
-    }
-
     return {
-        data
+        data: state.rulesReducer
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(ruleActions, dispatch)
+        actions: bindActionCreators(rulesActions, dispatch)
     };
 }
 

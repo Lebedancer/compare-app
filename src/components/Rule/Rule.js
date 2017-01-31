@@ -48,20 +48,12 @@ class Rule extends React.Component {
         }
     }
 
-    // async getData(id) {
-    //     const data = await appService.get();
-    //
-    //     this.setState({
-    //         data,
-    //         loading: false
-    //     });
-    //
-    //     this.validationService.setDefaultData(data);
-    // }
+    componentWillReceiveProps(nextProps) {
+        // this.validationService.setDefaultData(nextProps.data);
+    }
 
     _onChange(data) {
-        const state = this.state.data;
-        this.setState({ data: Object.assign({}, state, data)});
+        this.props.actions.updateRule({...this.props.data, ...data});
     }
 
     _getErrors(name) {
@@ -95,11 +87,11 @@ class Rule extends React.Component {
     render() {
         const titleClassName = `${style['md-row--form']} ${style['app__listHeader']}`;
         const data = this.props.data;
-            debugger;
+
         return (
             <div className={style.app}>
 
-                { !data ? <Loader /> :
+                { data.loading ? <Loader /> :
                     <div>
                         <h1>Новое правило</h1>
                         <ul className={style.app__list}>
@@ -133,7 +125,7 @@ class Rule extends React.Component {
                                 <MdInput error={this._getErrors('Name')} value={data.Name} onChange={this._onChangeName} />
                             </li>
                         </ul>
-                        <FooterSection onSave={this._onSave} onCancel={this._onCancel} loading={state.saveProcess}/>
+                        <FooterSection onSave={this._onSave} onCancel={this._onCancel} loading={data.saving}/>
                     </div>
                 }
             </div>);
@@ -141,17 +133,13 @@ class Rule extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    let data;
-    debugger;
+    let data =  {
+        Kontragents: [],
+        Name: ''
+    }
+
     if (ownProps.params.id) {
-        if (state.ruleReducer.Id) {
-            data = state.ruleReducer;
-        }
-    } else {
-        data = {
-            Kontragents: [],
-            Name: ''
-        }
+        data = state.ruleReducer;
     }
 
     return {
