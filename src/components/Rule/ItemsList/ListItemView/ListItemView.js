@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import MdCloseLink from '../../common/MdCloseLink';
+import MdCloseLink from '../../../common/MdCloseLink';
 import style from './style.css';
 
 class ListItemView extends React.Component {
