@@ -9,6 +9,8 @@ import validationRules from './validationRules';
 import ValidationService from '../../services/ValidationService';
 import FooterSection from './FooterSection';
 import { browserHistory } from 'react-router';
+import RuleStore from '../../stores/RuleStore';
+import { observer } from 'mobx-react'
 
 import style from './style.css';
 
@@ -16,19 +18,13 @@ class Rule extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            loading: true,
-            data: {
-                Kontragents: [],
-                Name: ''
-            }
-        };
-
         this._onChange = this._onChange.bind(this);
         this._getErrors = this._getErrors.bind(this);
         this._onChangeName = this._onChangeName.bind(this);
         this._onSave = this._onSave.bind(this);
         this._onCancel = this._onCancel.bind(this);
+
+        this.store = new RuleStore();
 
         this.validationService = new ValidationService({
             rules: validationRules
@@ -40,32 +36,22 @@ class Rule extends React.Component {
         const id = routeParams.id;
 
         if (id) {
-            this.getData(id);
-        } else {
-            this.setState({
-                loading: false
-            });
+            this.getData();
         }
     }
 
-    async getData(id) {
-        const data = await appService.get();
+    async getData() {
+        await this.store.getData();
 
-        this.setState({
-            data,
-            loading: false
-        });
-
-        this.validationService.setDefaultData(data);
+        this.validationService.setDefaultData(this.store.rule);
     }
 
     _onChange(data) {
-        const state = this.state.data;
-        this.setState({ data: Object.assign({}, state, data)});
+        this.store.updateRule(data);
     }
 
     _getErrors(name) {
-        return this.validationService.getMessage(name, this.state.data);
+        return this.validationService.getMessage(name, this.store.rule);
     }
 
     _onChangeName(event) {
@@ -74,12 +60,9 @@ class Rule extends React.Component {
     }
 
     _onSave() {
-        if (this.validationService.isValid(this.state.data)) {
-            this.setState({
-                saveProcess: true
-            });
+        if (this.validationService.isValid(this.store.rule)) {
 
-            appService.save()
+            this.store.save()
                 .then(()=> {
                     this._onCancel();
                 })
@@ -94,13 +77,12 @@ class Rule extends React.Component {
 
     render() {
         const titleClassName = `${style['md-row--form']} ${style['app__listHeader']}`;
-        const state = this.state;
-        const data = this.state.data;
-
+        const store = this.store;
+        const data = this.store.rule;
         return (
             <div className={style.app}>
 
-                { state.loading ? <Loader /> :
+                { store.loading ? <Loader /> :
                     <div>
                         <h1>Новое правило</h1>
                         <ul className={style.app__list}>
@@ -134,11 +116,11 @@ class Rule extends React.Component {
                                 <MdInput error={this._getErrors('Name')} value={data.Name} onChange={this._onChangeName} />
                             </li>
                         </ul>
-                        <FooterSection onSave={this._onSave} onCancel={this._onCancel} loading={state.saveProcess}/>
+                        <FooterSection onSave={this._onSave} onCancel={this._onCancel} loading={store.saving}/>
                     </div>
                 }
             </div>);
     }
 }
 
-export default Rule;
+export default observer(Rule);

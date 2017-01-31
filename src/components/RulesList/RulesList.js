@@ -1,36 +1,25 @@
 import React, {PropTypes} from 'react';
 
-import appService from '../../services/appService'
 import Loader from 'react-loader';
 import RuleListItem from './RuleListItem';
 import MdButton from '../common/MdButton';
-
+import {observer} from 'mobx-react'
 import { browserHistory } from "react-router";
 
 import style from './style.css';
+import RulesStore from '../../stores/RulesStore';
 
 class App extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            loading: true
-        };
+        this.store = new RulesStore();
 
         this._createNewRule = this._createNewRule.bind(this);
     }
 
     componentWillMount() {
-        this.getData();
-    }
-
-    async getData() {
-        const data = await appService.getList();
-
-        this.setState({
-            data,
-            loading: false
-        });
+        this.store.getData();
     }
 
     _createNewRule() {
@@ -38,16 +27,14 @@ class App extends React.Component {
     }
 
     render() {
-        const state = this.state;
-        const rules = this.state.data;
-
+        const store = this.store;
         return (
             <div className={style.list__page}>
-                { state.loading ? <Loader /> :
+                { store.loading ? <Loader /> :
                     <div>
                         <h1>Список правил</h1>
                         <ul className={style.list}>
-                            { rules.map((rule) =>
+                            { store.rules.map((rule) =>
                                 <RuleListItem key={rule.Id} data={rule}/>
                             )}
                         </ul>
@@ -60,4 +47,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default observer(App);
