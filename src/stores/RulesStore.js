@@ -1,13 +1,9 @@
-import { extendObservable } from 'mobx';
 import appService from '../services/appService';
+import {observable} from "mobx";
 
 class RulesStore {
-    constructor() {
-        extendObservable(this, {
-            rules: [],
-            loading: true
-        })
-    }
+    @observable rules = [];
+    @observable loading = true;
 
     async getData() {
         this.loading = true;
