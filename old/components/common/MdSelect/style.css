@@ -1,0 +1,27 @@
+.md-input {
+  font-size: 13px;
+}
+
+.md-input input {
+  border: 1px solid #dddddd;
+  box-shadow: none;
+  padding: 1px 8px;
+  height: 32px;
+  box-sizing: border-box;
+  color: #404040;
+  font-size: inherit;
+  display: block;
+  margin: 0;
+  width: inherit;
+  outline: none;
+  transition: all 0.25s linear;
+
+  &:focus {
+    border-color: #0ecf60;
+  }
+
+  &:disabled {
+    background-color: #f7f7f7;
+  }
+}
+

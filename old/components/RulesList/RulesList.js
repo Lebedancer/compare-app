@@ -34,7 +34,7 @@ class App extends React.Component {
     }
 
     _createNewRule() {
-        browserHistory.push('/rule');
+        browserHistory.push('/Rule');
     }
 
     render() {

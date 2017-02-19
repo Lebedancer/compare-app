@@ -1,0 +1,44 @@
+.md-button {
+  position: relative;
+  display: inline-block;
+  margin: 0 8px 0 0;
+  outline: none;
+}
+
+.md-button__body {
+  outline: none;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  text-align: center;
+  height: 32px;
+  padding: 0 16px;
+  font-weight: bold;
+  background-image: none;
+  background-color: #0A9644;
+  color: #ffffff;
+  border-color: #0A9644;
+  transition: all 0.20s linear;
+
+  &:hover {
+    background-color: #36aa51;
+    border-color: #36aa51;
+  }
+
+  &:active {
+    background-color: #1d8844;
+    border-color: #1d8844;
+  }
+}
+
+.md-button__body--loading {
+  color: rgba(0, 0, 0, 0);
+  cursor: default;
+
+  &:hover {
+    background-color: #0A9644;
+    border-color: #0A9644;
+  }
+
+}

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'closeLink';
+    src: url('./fonts/closeLink.eot');
+    src: url('./fonts/closeLink.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/closeLink.woff') format('woff'),
+    url('./fonts/closeLink.ttf') format('truetype'),
+    url('./fonts/closeLink.svg#fontello-copy-doc-control') format('svg');
+}
+
+.mdCloseLink {
+    font-family: closeLink;
+    font-style: normal;
+    color: #b2b2b2;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.mdCloseLink:before {
+    vertical-align: middle;
+    content: 'x';
+    transition: all .3s ease;
+}
+
+.mdCloseLink:hover {
+    color: #cb3338;
+}

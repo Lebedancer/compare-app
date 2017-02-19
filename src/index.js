@@ -1,12 +1,17 @@
 import 'babel-polyfill';
 import Vue from 'vue/dist/vue.js'
 import template from './app-template.html'
+import router from './router'
+import VueRouter from 'vue-router'
+import Navigation from './components/Navigation'
 
-const root = new Vue({
+Vue.use(VueRouter);
+
+new Vue({
     el: '#app',
+    router,
     template,
-    data: {
-        name: `Mike Reynolds`,
-        currentTime: new Date()
-    },
+    components: {
+        Navigation
+    }
 });

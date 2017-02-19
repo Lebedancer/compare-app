@@ -1,0 +1,15 @@
+.lineNumber {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #c7c7c7;
+    text-align: center;
+    line-height: 29px;
+    color: #fff;
+    font-style: normal;
+    padding-right: 1px;
+    left: 0;
+    top: 1px;
+}
