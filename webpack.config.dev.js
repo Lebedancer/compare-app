@@ -2,9 +2,8 @@ import webpack from 'webpack';
 import path from 'path';
 
 export default {
-    debug: true,
+    watch: true,
     devtool: 'cheap-module-eval-source-map',
-    noInfo: false,
     entry: [
         'eventsource-polyfill', // necessary for hot reloading with IE
         'webpack-hot-middleware/client?reload=true', //note that it reloads the page if hot module reloading fails.
@@ -23,19 +22,38 @@ export default {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
     ],
-    postcss: function() {
-        return [
-            require('postcss-cssnext')
-        ];
-    },
     module: {
-        loaders: [
-            { test: /\.js$/, include: path.join(__dirname, 'src'), loader: 'babel' },
-            { test: /(\.css)$/, loaders: ['style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&sourceMap', 'postcss'] },
-            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-            { test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000' },
-            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' }
+        rules: [
+            { test: /\.js$/, include: path.join(__dirname, 'src'), loader: 'babel-loader' },
+            {
+                test: /(\.css)$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: '[name]__[local]___[hash:base64:5]',
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    }
+                ]
+
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
+            },
+            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
+            { test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000' },
+            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
+            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' }
         ]
     }
 }

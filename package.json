@@ -12,22 +12,22 @@
     "dependencies": {
         "babel-plugin-class-properties-7to6": "^0.0.1",
         "babel-polyfill": "^6.20.0",
+        "babel-preset-es2015-webpack": "^6.4.3",
         "babel-preset-stage-0": "^6.16.0",
         "bootstrap": "3.3.6",
+        "html-loader": "^0.4.4",
         "jquery": "2.2.3",
-        "postcss": "^5.2.10",
+        "postcss": "^5.2.6",
         "postcss-cssnext": "^2.9.0",
         "postcss-loader": "^1.2.1",
-        "react": "^15.4.2",
+        "react": "^15.4.1",
         "react-dom": "^15.4.1",
         "react-loader": "^2.4.0",
         "react-redux": "4.4.5",
         "react-router": "2.4.0",
-        "react-router-redux": "4.0.4",
-        "redux": "3.5.2",
-        "redux-thunk": "2.0.1",
         "toastr": "2.1.2",
-        "validate.js": "^0.11.1"
+        "validate.js": "^0.11.1",
+        "vue": "^2.1.10"
     },
     "devDependencies": {
         "babel-cli": "6.8.0",
@@ -64,7 +64,7 @@
         "rimraf": "2.5.2",
         "style-loader": "0.13.1",
         "url-loader": "0.5.7",
-        "webpack": "1.13.0",
+        "webpack": "2.2.0-rc.2",
         "webpack-dev-middleware": "1.6.1",
         "webpack-hot-middleware": "2.10.0"
     }

@@ -1,10 +1,12 @@
 import 'babel-polyfill';
-import React from 'react';
-import {render} from 'react-dom';
-import {Router, browserHistory} from 'react-router';
-import routes from './routes';
+import Vue from 'vue/dist/vue.js'
+import template from './app-template.html'
 
-render(
-    <Router history={browserHistory} routes={routes}/>,
-    document.getElementById('app')
-);
+const root = new Vue({
+    el: '#app',
+    template,
+    data: {
+        name: `Mike Reynolds`,
+        currentTime: new Date()
+    },
+});
