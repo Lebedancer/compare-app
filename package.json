@@ -2,6 +2,7 @@
     "name": "compare-app",
     "version": "0.0.1",
     "scripts": {
+        "strt": "yarn open:src",
         "start": "npm-run-all --parallel test:watch open:src lint:watch",
         "open:src": "babel-node tools/srcServer.js",
         "lint": "esw webpack.config.* src tools",
@@ -16,6 +17,7 @@
         "babel-preset-stage-0": "^6.16.0",
         "bootstrap": "3.3.6",
         "html-loader": "^0.4.4",
+        "http-proxy": "^1.16.2",
         "jquery": "2.2.3",
         "postcss": "^5.2.6",
         "postcss-cssnext": "^2.9.0",

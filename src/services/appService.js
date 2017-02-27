@@ -12,7 +12,7 @@ const headers = {
 
 class AppService {
     getList() {
-        return fetch('/getList', headers)
+        return fetch('/rule', headers)
             .then(response => {
                 return response.json();
             });
